@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -17,12 +18,13 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        myTableView.dataSource = self
+        myTableView.delegate = self
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        loadFromFirebase()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,7 +42,41 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func loadFromFirebase()
     {
-        
+        let db = Firestore.firestore()
+            db.collection("Events").addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else { print("Error fetching document: \(error!)")
+                    return
+                }
+                self.events.removeAll()
+                let documentData = document.documents
+                
+                for item in documentData
+                {
+                    let data = item.data()
+                    let created = data["created"] as? Double ?? Double(Date().timeIntervalSince1970)
+                    let name = data["name"] as? String ?? "Hello"
+                    let isBack = data["isBack"] as? Bool ?? true
+                    
+                    let date = Date(timeIntervalSince1970: created)
+                    
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .medium
+                    formatter.timeStyle = .long
+                    let displayDate = formatter.string(from: date)
+                    
+                    if isBack {
+                        self.events.append("\(name): returned \(displayDate)")
+                    }
+                    else {
+                        self.events.append("\(name): left \(displayDate)")
+                    }
+                    
+                    
+                    
+                }
+
+                self.myTableView.reloadData()
+            }
     }
     
 

@@ -70,9 +70,6 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     else {
                         self.events.append("\(name): left \(displayDate)")
                     }
-                    
-                    
-                    
                 }
 
                 self.myTableView.reloadData()

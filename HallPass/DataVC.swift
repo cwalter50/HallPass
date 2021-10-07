@@ -10,7 +10,7 @@ import Firebase
 
 class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var events = [String]()
+    var events = [Event]()
 
     @IBOutlet weak var myTableView: UITableView!
     
@@ -34,7 +34,7 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         let event = events[indexPath.row]
-        cell.textLabel?.text = event
+        cell.textLabel?.text = event.description
         
         return cell
     }
@@ -48,29 +48,28 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 self.events.removeAll()
+                
                 let documentData = document.documents
                 
                 for item in documentData
                 {
-                    let data = item.data()
-                    let created = data["created"] as? Double ?? Double(Date().timeIntervalSince1970)
-                    let name = data["name"] as? String ?? "Hello"
-                    let isBack = data["isBack"] as? Bool ?? true
+//                    let event = Event(document: item)
+                    // create a standard event and fill it with the values...
+                    var event = Event()
+                    event.id = item.documentID
                     
-                    let date = Date(timeIntervalSince1970: created)
-                    
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .medium
-                    formatter.timeStyle = .long
-                    let displayDate = formatter.string(from: date)
-                    
-                    if isBack {
-                        self.events.append("\(name): returned \(displayDate)")
-                    }
-                    else {
-                        self.events.append("\(name): left \(displayDate)")
-                    }
+                    let data = item.data() // This is a [String:Any] Dictionary
+
+                    event.timeReturned = data["timeReturned"] as? Double ?? 0.0
+                    event.timeLeft = data["timeLeft"] as? Double ?? 0.0
+                    event.totalTimeOut = data["totalTimeOut"] as? Double ?? 0.0
+                    event.name = data["name"] as? String ?? "Doc"
+                
+                    self.events.append(event)
                 }
+                
+                // sort events
+                self.events = self.events.sorted(by: { $0.timeLeft > $1.timeLeft })
 
                 self.myTableView.reloadData()
             }

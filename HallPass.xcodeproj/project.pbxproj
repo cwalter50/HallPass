@@ -21,6 +21,7 @@
 		83C6B9D5270E125900083217 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 83C6B9D4270E125900083217 /* FirebaseStorage */; };
 		83C6B9D7270E1FDC00083217 /* DataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C6B9D6270E1FDC00083217 /* DataVC.swift */; };
 		83C6B9D9270E273400083217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83C6B9D8270E273400083217 /* GoogleService-Info.plist */; };
+		83C6B9DB270E751300083217 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C6B9DA270E751300083217 /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		38E5B931270E0FDE001C75C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83C6B9D6270E1FDC00083217 /* DataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVC.swift; sourceTree = "<group>"; };
 		83C6B9D8270E273400083217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		83C6B9DA270E751300083217 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				38E5B925270E0FDC001C75C0 /* SceneDelegate.swift */,
 				38E5B927270E0FDC001C75C0 /* ViewController.swift */,
 				83C6B9D6270E1FDC00083217 /* DataVC.swift */,
+				83C6B9DA270E751300083217 /* Event.swift */,
 				38E5B929270E0FDC001C75C0 /* Main.storyboard */,
 				38E5B92C270E0FDE001C75C0 /* Assets.xcassets */,
 				38E5B92E270E0FDE001C75C0 /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				38E5B924270E0FDC001C75C0 /* AppDelegate.swift in Sources */,
 				83C6B9D7270E1FDC00083217 /* DataVC.swift in Sources */,
 				38E5B926270E0FDC001C75C0 /* SceneDelegate.swift in Sources */,
+				83C6B9DB270E751300083217 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

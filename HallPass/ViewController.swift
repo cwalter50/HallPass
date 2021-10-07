@@ -7,11 +7,9 @@
 
 import UIKit
 import Firebase
-import simd
 
 class ViewController: UIViewController
 {
-
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var myButton: UIButton!
     @IBOutlet weak var myLabel: UILabel!
